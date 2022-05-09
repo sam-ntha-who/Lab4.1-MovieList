@@ -26,7 +26,7 @@ public class MovieList {
 		System.out.println("Welcome to the Movie List Application!");
 		System.out.println("There are 10 movies in this list.");
 		ArrayList<Movie> movieList = new ArrayList<>();
-		
+
 		movieList.add(new Movie("Paris Je T'aime", "drama"));
 		movieList.add(new Movie("Inception", "scifi"));
 		movieList.add(new Movie("Soul", "animated"));
@@ -38,31 +38,43 @@ public class MovieList {
 		movieList.add(new Movie("The Quiet Place", "horror"));
 		movieList.add(new Movie("Steel Magnolias", "drama"));
 		Scanner scnr = new Scanner(System.in);
-do {
-		System.out.println("Please choose from the following movie genres: drama, scifi, animated or horror");
-		String userInput = scnr.nextLine().toLowerCase();
+		do {
+			System.out.println("Please choose from the following movie genres: drama, scifi, animated or horror");
+			String userInput = scnr.nextLine().toLowerCase();
+			while (userInput.equals("")) {
+				System.out.println("Genre cannot be blank, please choose a genre:");
+				userInput = scnr.nextLine().toLowerCase();
+			}
 //		Display the movies for the selected category in alphabetical order.
-		Collections.sort(movieList, Movie.sortTitle);
+			Collections.sort(movieList, Movie.sortTitle);
 
 //		ArrayList and display a line for any movie whose category matches the category entered by the user.
-		for (Movie movie : movieList) {
-			if (movie.getCategory().equals(userInput)) {
+			for (Movie movie : movieList) {
+				if (movie.getCategory().equals(userInput)) {
 //	Display the movies for the selected category in alphabetical order.
-				
-				System.out.println(movie.getTitle());
-			}
 
-		} 
-		System.out.println("\nWould you like to know about another genre? (yes or no)");
-		String answer = scnr.nextLine();
-		if (answer.equalsIgnoreCase("yes")) {
-			yesOrNo = true;
-		} else {
-			System.out.println("Enjoy your movie!");
-			break;
-		}
+					System.out.println(movie.getTitle());
+
+				} else {
+					System.out.println("Genre does not exist in database.");
+					break;
+				}
+
+			}
+			System.out.println("\nWould you like to know about another genre? (yes or no)");
+			String answer = scnr.nextLine();
+			while (answer.equals("")) {
+				System.out.println("Response cannot be blank, please respond with yes or no:");
+				answer = scnr.nextLine().toLowerCase();
+			}
+			if (answer.equalsIgnoreCase("yes")) {
+				yesOrNo = true;
+			} else {
+				System.out.println("Enjoy your movie!");
+				break;
+			}
 		} while (yesOrNo = true);
-	scnr.close();
+		scnr.close();
 	}
 
 }
